@@ -1,0 +1,244 @@
+export class Node {
+    constructor(data, next = null, prev = null) {
+        this.data = data;
+        this.next = next;
+        this.prev = prev;
+    }
+
+    getData() { return this.data; }
+
+    setData(data) { this.data = data; }
+
+    getNext() { return this.next; }
+
+    setNext(next) { this.next = next; }
+
+    getPrev() { return this.prev; }
+
+    setPrev(prev) { this.prev = prev; }
+}
+
+
+export default class DoublyLinkedList {
+    constructor() {
+        this.head = null;
+        this.tail = null;
+        this.size = 0;
+    }
+
+    getSize() { return this.size; }
+
+    getHead() { return this.head; }
+
+    getTail() { return this.tail; }
+
+    // Insert node at the beginning
+    push(data) { 
+        const node = new Node(data, this.head, null);
+        if (this.size === 0) { // if list is empty
+            this.head = node;
+            this.tail = node;
+        } else {
+            this.tail.next = node;
+            node.prev = this.tail;
+            this.tail = node;
+        }
+        this.size++;
+        return this;
+    }
+
+    // Remove node from the end of list
+    pop() {
+        if (this.size === 0) return null; // if list is empty
+        let temp = this.tail;
+        if (this.size === 1) { // if list has one element
+            this.head = null;
+            this.tail = null;
+        } else { // if list has two or more elements
+            this.tail = this.tail.prev;
+            this.tail.next = null;
+            temp.prev = null;
+        }
+        this.size--;
+        return temp; // return the node that was removed
+    }
+
+    // Add node to the beginning of list
+    unshift(data) { 
+        const node = new Node(data);
+        if (this.size === 0) { // if list is empty
+            this.head = node;
+            this.tail = node;
+        } else {
+            node.next = this.head;
+            this.head.prev = node;
+            this.head = node;
+        }
+        this.size++;
+        return this;
+    }
+
+    // Remove node from the beginning of list
+    shift() {
+        if (this.size === 0) return null; // if list is empty
+        let temp = this.head;
+        if (this.size === 1) { // if list has one element
+            this.head = null;
+            this.tail = null;
+        } else { // if list has two or more elements
+            this.head = this.head.next;
+            this.head.prev = null;
+            temp.next = null;
+        }
+        this.size--;
+        return temp; // return the node that was removed
+    }
+
+    // Insert node at index
+    insert(index, data) {
+        if (index > 0 && index > this.size || index < 0) return false; // If index is out of range
+        if (index === 0) return this.unshift(data); // Inserting at the beginning of the list
+        if (index === this.size) return this.push(data); // Inserting at the end of the list
+
+        const before = this.getAt(index - 1); // Get node 1 before desired index
+        const node = new Node(data, before.next);
+        const after = before.next;
+        before.next = node;
+        node.next = after;
+        after.prev = node;
+        node.prev = before;
+        this.size++; // Increment list size by 1
+        return true;
+    }
+
+    // Get node at index
+    get(index) {
+        if (index > this.size || index < 0) return false;
+        let temp = this.head;
+        if (index < this.size / 2) {
+            for (let i = 0; i < index; i++) {
+                temp = temp.next;
+            }
+        } else {
+            temp =  this.tail;
+            for (let i = this.size - 1; i > index; i--) {
+                temp = temp.prev;
+            }
+        }
+        return temp;
+    }
+
+    // Another way to get node at index
+    getAt(index) {
+        if (index >= this.size || index < 0) return false;
+        else {
+            let current = this.head;
+            let it = 0;
+
+            while (it < index) {
+                it++;
+                current = current.next;
+            }
+            return current;
+        }
+    }
+
+    // Update node at index
+    set(index, value) {
+        if (index >= this.size || index < 0) return false;
+        let temp = this.get(index);
+        if (temp) {
+            temp.data = value;
+            return true;
+        }
+        return false;
+    }
+
+    // Remove node at index
+    remove(index) {
+        if (index >= this.size || index < 0) return false; // If index is out of range
+        if (index === 0) return this.shift(); // Removing from the beginning of the list
+        if (index === this.size - 1) return this.pop(); // Removing from the end of the list
+
+        const temp = this.getAt(index); // Get node 1 before desired index
+        temp.prev.next = temp.next;
+        temp.next.prev = temp.prev;
+        temp.next = null;
+        temp.prev = null;
+        this.size--; // Decrement list size by 1
+        return temp; // Return the node that was removed
+    }
+
+    fillList(...data) {
+        // let current = this.head, prev;
+        // if (this.size === 0) {
+        //     for (let i = data.length - 1; i >= 0; i--) {
+        //         console.log(current);
+        //         prev = 
+        //         this.head = new Node(data[i], this.head, current);
+        //         this.size++;
+        //     }
+        // }
+    }
+
+    // Clear list
+    clearList() {
+        this.head = null;
+        this.tail = null;
+        this.size = 0;
+    }
+
+    // Print list data
+
+    // Print list data in reverse
+
+    // Reverse list
+
+    // Sort list
+
+    // Get size of list
+
+    // Get head of list
+
+    // Set head of list
+
+    // Get tail of list
+
+    // Set tail of list
+
+    // Create and fill list
+
+    // Move tail to head 
+
+    // Move head to tail
+
+    // Convert to array
+
+    // Convert from array
+
+    // Convert to string
+
+    // Convert from string
+
+    // Convert to JSON
+
+    // Convert from JSON
+
+    // Contains
+
+    // Find index of node
+
+    // Find node
+
+    // Insert node before
+
+    // Insert node after
+
+    // Empty?
+
+    // Is head?
+
+    // Is tail?
+
+    // Print list
+}
