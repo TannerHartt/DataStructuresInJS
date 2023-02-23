@@ -238,7 +238,7 @@ describe("Doubly LinkedList", () => {
     });
 
     
-    it.only("Should fill the list with any amount of passed values", () => {
+    it("Should fill the list with any amount of passed values", () => {
         expect(linkedList.getSize()).toBe(0);
         linkedList.fillList(1, 2, 3, 4);
         expect(linkedList.getSize()).toBe(4);

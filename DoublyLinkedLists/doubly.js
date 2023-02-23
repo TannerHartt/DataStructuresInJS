@@ -177,7 +177,6 @@ export default class DoublyLinkedList {
         return this.head;
     }
 
-
     // Clear list
     clearList() {
         this.head = null;
@@ -192,10 +191,6 @@ export default class DoublyLinkedList {
     // Reverse list
 
     // Sort list
-
-    // Get size of list
-
-    // Get head of list
 
     // Set head of list
 
@@ -221,13 +216,14 @@ export default class DoublyLinkedList {
     }
 
     // Convert from array
+    
 
     // Convert to string
     convertToString() {
         let temp = this.head;
         let str = '';
 
-        while(temp) {
+        while(temp !== null) {
             if (temp.next) {
                 str = str.concat(temp.data).concat(" ");
             } else {
@@ -241,6 +237,14 @@ export default class DoublyLinkedList {
     // Convert from string
 
     // Convert to JSON
+    convertToJSON() {
+        let results = {};
+        let temp = this.head;
+
+        while (temp !== null) {
+            
+        }
+    }
 
     // Convert from JSON
 

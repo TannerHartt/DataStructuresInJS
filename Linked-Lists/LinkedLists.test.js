@@ -64,7 +64,7 @@ describe("LinkedList", () => {
     });
 
     it("Should remove the first element and return it", () => {
-        linkedList.createAndFillList(1, 2, 3, 4, 5);
+        linkedList.fillList(1, 2, 3, 4, 5);
         
         expect(linkedList.shift().data).toBe(1);
         expect(linkedList.getSize()).toBe(4);
@@ -149,7 +149,7 @@ describe("LinkedList", () => {
     });
 
     it("Should fill the list with mulitple numbers and return the element at an index", () => {
-        linkedList.createAndFillList(1, 1, 5, 55, 555, 5555, 55555, 1, 2, 3);
+        linkedList.fillList(1, 1, 5, 55, 555, 5555, 55555, 1, 2, 3);
 
         expect(linkedList.getAt(0).data).toEqual(1);
         expect(linkedList.getAt(1).data).toEqual(1);
@@ -162,9 +162,9 @@ describe("LinkedList", () => {
         expect(linkedList.getAt(-1)).toBeFalsy(); // Out of bounds
     });
 
-    // TODO - Fix createAndFillList to include this.tail property
+    // TODO - Fix fillList to include this.tail property
     it("Should return the last node in the list", () => {
-        linkedList.createAndFillList(1, 1, 5, 55, 5555, 555, 0);
+        linkedList.fillList(1, 1, 5, 55, 5555, 555, 0);
 
         expect(linkedList.getTail().data).toBe(0);
         expect(linkedList.getTail().next).toBe(null);
@@ -197,7 +197,7 @@ describe("LinkedList", () => {
     });
 
     it("Should return true if the list contains a value", () => {
-        linkedList.createAndFillList(1, 1, 5, 55, 555, 5555, 55555, 1, 2, 3);
+        linkedList.fillList(1, 1, 5, 55, 555, 5555, 55555, 1, 2, 3);
 
         expect(linkedList.contains(5555)).toBeTruthy();
         expect(linkedList.contains(555)).toBeTruthy();
@@ -255,7 +255,7 @@ describe("LinkedList", () => {
     });
 
     it("Should convert the list of numbers to a string separated by spaces", () => {
-        linkedList.createAndFillList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+        linkedList.fillList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
 
         expect(linkedList.convertToString(linkedList.head)).toBe("1 2 3 4 5 6 7 8 9 10");
         expect(linkedList.convertToString(linkedList.head)).toContain("1 2 3");
@@ -264,8 +264,8 @@ describe("LinkedList", () => {
         expect(linkedList.convertToString(linkedList.head)).toContain("10");
     });
 
-    it("Should sort the list", () => {
-        linkedList.createAndFillList(100, 24, 55, 23, 88, 1, 4, 2, 6, 5);
+    it("Should sort the list using the insertion sort method", () => {
+        linkedList.fillList(100, 24, 55, 23, 88, 1, 4, 2, 6, 5);
         let sorted = linkedList.insertionSort();
 
         expect(sorted.data).toBe(1); // Head
@@ -281,7 +281,7 @@ describe("LinkedList", () => {
     });
 
     it("Should sort the list using the standalone insertion sort method", () => {
-        linkedList.createAndFillList(22, 1, 5, 26, 77, 54, 41, 9, 100, 88);
+        linkedList.fillList(22, 1, 5, 26, 77, 54, 41, 9, 100, 88);
         const sorted = insertionSort(linkedList.head);
 
         expect(sorted.data).toBe(1); // Head
@@ -313,7 +313,7 @@ describe("LinkedList", () => {
     });
     
     it("Should move the last element to the front", () => {
-        linkedList.createAndFillList(1, 2, 3, 4);
+        linkedList.fillList(1, 2, 3, 4);
         const temp = linkedList.moveTailToFront(linkedList.head);
         expect(temp.head.data).toBe(4);
         expect(temp.head.next.data).toBe(1);
@@ -321,7 +321,7 @@ describe("LinkedList", () => {
     });
 
     it("Should move the first element to the back", () => {
-        linkedList.createAndFillList(1, 2, 3, 4);
+        linkedList.fillList(1, 2, 3, 4);
         linkedList.moveHeadToLast(linkedList.head);
         expect(linkedList.head.data).toBe(2);
         expect(linkedList.head.next.data).toBe(3);
@@ -330,7 +330,7 @@ describe("LinkedList", () => {
     });
 
     it("Should insert a new node after a specified value", () => {
-        linkedList.createAndFillList(1, 2, 3);
+        linkedList.fillList(1, 2, 3);
         linkedList.insertAfter(24, 2);
 
         expect(linkedList.head.next.next.data).toBe(24);
@@ -340,7 +340,7 @@ describe("LinkedList", () => {
     });
 
     it("Should insert a new node before a specified value", () => {
-        linkedList.createAndFillList(1, 2, 3);
+        linkedList.fillList(1, 2, 3);
         linkedList.insertBefore(24, 2);
 
         expect(linkedList.head.next.data).toBe(24);
@@ -350,7 +350,7 @@ describe("LinkedList", () => {
     });
 
     it("Should remove a node containing a specified value", () => {
-        linkedList.createAndFillList(1, 2, 3, 4);
+        linkedList.fillList(1, 2, 3, 4);
         linkedList.removeTargetElement(3); // 1, 2, 4
 
         expect(linkedList.head.next.data).toBe(2);
@@ -375,7 +375,7 @@ describe("LinkedList", () => {
     });
 
     it("Should create a list containing several nodes holding objects", () => {
-        linkedList.createAndFillList(
+        linkedList.fillList(
             {city: 'Boston', zip: 20155, country: 'U.S.'},
             {city: 'Milwaukee', zip: 23411, country: 'U.S.'},
             {city: 'Paris', zip: 20155, country: 'France'},
@@ -388,7 +388,7 @@ describe("LinkedList", () => {
     });
 
     it("Should convert a list of data into an array containing each element in the list", () => {
-        linkedList.createAndFillList(1, 2, 3, 4, 5
+        linkedList.fillList(1, 2, 3, 4, 5
             // {city: 'Boston', zip: 20155, country: 'U.S.'},
             // {city: 'Milwaukee', zip: 23411, country: 'U.S.'},
             // {city: 'Paris', zip: 20155, country: 'France'},

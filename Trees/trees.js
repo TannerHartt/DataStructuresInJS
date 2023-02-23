@@ -60,6 +60,7 @@ export default class Tree {
         }
     }
 
+    // Returns true if list contains the value, false if not
     contains(data) { 
         if (this.root === null) return false;
         let temp = this.root;
@@ -76,6 +77,7 @@ export default class Tree {
 
     }
 
+    // Returns the smallest value in the tree
     minimumValue(currentNode) {
         while (currentNode.left !== null) {
             currentNode = currentNode.left;
@@ -83,6 +85,7 @@ export default class Tree {
         return currentNode;
     }
 
+    // Returns the highest value in the tree
     maximumValue(currentNode) {
         while (currentNode.right !== null) {
             currentNode = currentNode.right;
@@ -90,10 +93,12 @@ export default class Tree {
         return currentNode;
     }
 
+    // Checks if a list is empty - returns a boolean
     isEmpty() {
         return this.root === null;
     }
 
+    // Searches the tree left to right and places the values in an array, returns array containing entire tree in order.
     breadthFirstSearch() {
         let current = this.root;
         let queue = [];
@@ -109,6 +114,7 @@ export default class Tree {
         return results;
     }
 
+    
     DFSPreOrder() {
         let results = [];
 

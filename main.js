@@ -1,5 +1,6 @@
 import './style.css';
 import javascriptLogo from './public/javascript.svg';
+import DoublyLinkedList from './DoublyLinkedLists/doubly';
 
 document.querySelector('#app').innerHTML = `
   <div>
