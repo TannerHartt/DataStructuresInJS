@@ -29,3 +29,5 @@ This project also contains a collection of utility functions that can be found i
 The server will be running at localhost:5173 but wont be necessary to open.
 
 The functions and algorithms are tested using the Vite testing framework Vitest and not using the live server. The server is used primarily for live debugging.
+
+The test command prioritizes the test file that being viewed/focused but if none are being viewed then it runs all available tests.
