@@ -236,6 +236,29 @@ describe("Doubly LinkedList", () => {
         expect(linkedList.remove(-1)).toBeFalsy(); // Out of bounds
         expect(linkedList.remove(10)).toBeFalsy(); // Out of bounds
     });
+
+    
+    it.only("Should fill the list with any amount of passed values", () => {
+        expect(linkedList.getSize()).toBe(0);
+        linkedList.fillList(1, 2, 3, 4);
+        expect(linkedList.getSize()).toBe(4);
+        expect(linkedList.getTail().data).toBe(4);
+        expect(linkedList.getHead().data).toBe(1);
+        expect(linkedList.getTail().prev.data).toBe(3)
+        linkedList.clearList();
+        
+        linkedList.fillList(2, 1, 7, 9, 3, 5, 11, 123);
+        expect(linkedList.getSize()).toBe(8);
+        expect(linkedList.getTail().data).toBe(123);
+        expect(linkedList.getHead().data).toBe(2);
+        expect(linkedList.get(3).data).toBe(9);
+
+        linkedList.fillList(2, 2, 3);
+        expect(linkedList.getSize()).toBe(11);
+        expect(linkedList.getTail().data).toBe(3);
+        expect(linkedList.getHead().data).toBe(2);
+        expect(linkedList.get(3).data).toBe(9);
+    });
 });
 
 

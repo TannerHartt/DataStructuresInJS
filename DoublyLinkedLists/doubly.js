@@ -32,7 +32,7 @@ export default class DoublyLinkedList {
 
     getTail() { return this.tail; }
 
-    // Insert node at the beginning
+    // Insert node at the end of a list
     push(data) { 
         const node = new Node(data, this.head, null);
         if (this.size === 0) { // if list is empty
@@ -169,17 +169,14 @@ export default class DoublyLinkedList {
         return temp; // Return the node that was removed
     }
 
+    // Fills a list with any amount of passed values (works on empty or non-empty lists)
     fillList(...data) {
-        // let current = this.head, prev;
-        // if (this.size === 0) {
-        //     for (let i = data.length - 1; i >= 0; i--) {
-        //         console.log(current);
-        //         prev = 
-        //         this.head = new Node(data[i], this.head, current);
-        //         this.size++;
-        //     }
-        // }
+        for (let i = 0; i < data.length; i++) {
+            this.push(data[i]); 
+        }
+        return this.head;
     }
+
 
     // Clear list
     clearList() {
@@ -213,10 +210,33 @@ export default class DoublyLinkedList {
     // Move head to tail
 
     // Convert to array
+    convertToArray() {
+        let values = [];
+        let current = this.head;
+        while (current !== null) {
+            values.push(current.data);
+            current = current.next;
+        }
+        return values;
+    }
 
     // Convert from array
 
     // Convert to string
+    convertToString() {
+        let temp = this.head;
+        let str = '';
+
+        while(temp) {
+            if (temp.next) {
+                str = str.concat(temp.data).concat(" ");
+            } else {
+                str = str.concat(temp.data);
+            }
+            temp = temp.next;
+        }
+        return str;
+    }
 
     // Convert from string
 
