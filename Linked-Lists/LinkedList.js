@@ -165,12 +165,10 @@ export default class LinkedList {
 
     ////
     // Create list with mulitple elements
-    createAndFillList(...data) {
-        for (let i = data.length - 1; i >= 0; i--) {
-            this.head = new Node(data[i], this.head);
-            this.size++;
+    fillList(...data) {
+        for (let i = 0; i < data.length; i++) {
+            this.push(data[i]); 
         }
-        this.tail = this.getAt(this.size - 1);
         return this.head;
     }
 
@@ -203,10 +201,10 @@ export default class LinkedList {
             last = last.next;
         }
 
+        
         this.head = first.next;
         first.next = null;
         last.next = first;
-
         return this;
     }
 
@@ -308,19 +306,18 @@ export default class LinkedList {
     isEmpty() { return this.size === 0; }
 
     // Insert after a target value
-    insertAfter(insertData, targetValue) {
-        if (this.head === null || this.head.next === null || !contains(this.head, targetValue)) return;
-        let curr = this.head;
+    insertAfter(data, targetValue) {
+        if (this.size === 0 || this.head === null) return false;
+        let current = this.head;
 
-        while(curr !== null) {
-            if (curr.getData() == targetValue) break;
-            curr = curr.next;
+        while (current) {
+            if (current.data === targetValue) break;
+            current = current.next;
         }
 
-        let temp = new Node(insertData, curr.next);
-        curr.next = temp;
+        let node = new Node(data, current.next);
+        current.next = node;
         this.size++;
-        
         return this.head;
     }
 
@@ -352,7 +349,7 @@ export default class LinkedList {
 
      // Remove target element from list
     removeTargetElement(target) {
-        if (this.head === null || this.head.next === null || !this.contains(target)) return;
+        if (this.head === null) return null;
         if (this.size === 0) return this.head;
         let current = this.head;
         let prev = null;
