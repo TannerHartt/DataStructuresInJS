@@ -162,13 +162,14 @@ describe("LinkedList", () => {
         expect(linkedList.getAt(-1)).toBeFalsy(); // Out of bounds
     });
 
-    // TODO - Fix fillList to include this.tail property
     it("Should return the last node in the list", () => {
         linkedList.fillList(1, 1, 5, 55, 5555, 555, 0);
 
         expect(linkedList.getTail().data).toBe(0);
         expect(linkedList.getTail().next).toBe(null);
         expect(linkedList.isEmpty()).toBeFalsy();
+        expect(linkedList.getSize()).toBe(7);
+        expect(linkedList.getHead().data).toBe(1);
     });
 
     it("Should remove a node from the list at an index", () => {
@@ -213,6 +214,7 @@ describe("LinkedList", () => {
         linkedList.clearList();
         expect(linkedList.isEmpty()).toBeTruthy();
         expect(!linkedList.isEmpty()).toBeFalsy();
+        expect(linkedList.getSize()).toBe(0);
     });
 
     it("should add a node to the list at an index", () => {
@@ -337,6 +339,16 @@ describe("LinkedList", () => {
         expect(linkedList.convertToString()).toBe('1 2 24 3');
         expect(linkedList.getAt(2).data).toBe(24);
         expect(linkedList.size).toBe(4);
+        expect(linkedList.getHead().data).toBe(1);
+        expect(linkedList.getTail().data).toBe(3);
+
+        linkedList.insertAfter(33, 24);
+        expect(linkedList.head.next.next.next.data).toBe(33);
+        expect(linkedList.convertToString()).toBe('1 2 24 33 3');
+        expect(linkedList.getAt(3).data).toBe(33);
+        expect(linkedList.size).toBe(5);
+        expect(linkedList.getHead().data).toBe(1);
+        expect(linkedList.getTail().data).toBe(3);
     });
 
     it("Should insert a new node before a specified value", () => {
@@ -347,6 +359,16 @@ describe("LinkedList", () => {
         expect(linkedList.convertToString()).toBe('1 24 2 3');
         expect(linkedList.getAt(1).data).toBe(24);
         expect(linkedList.size).toBe(4);
+        expect(linkedList.getHead().data).toBe(1);
+        expect(linkedList.getTail().data).toBe(3);
+
+        linkedList.insertBefore(33, 24);
+        expect(linkedList.head.next.next.data).toBe(24);
+        expect(linkedList.convertToString()).toBe('1 33 24 2 3');
+        expect(linkedList.getAt(1).data).toBe(33);
+        expect(linkedList.size).toBe(5);
+        expect(linkedList.getHead().data).toBe(1);
+        expect(linkedList.getTail().data).toBe(3);
     });
 
     it("Should remove a node containing a specified value", () => {

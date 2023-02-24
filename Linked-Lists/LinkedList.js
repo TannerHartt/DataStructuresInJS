@@ -48,6 +48,49 @@ export default class LinkedList {
         this.size++;
         return this;
     }
+    
+    ////
+    // Remove first
+    shift() {
+        if (!this.head) return null;
+        let temp = this.head;
+        this.head = this.head.next;
+        temp.next = null;
+        this.size--;
+        if (this.size === 0) { 
+            this.tail = null; // If list is empty, set tail to null to to break last pointer & avoid memory leaks
+        }
+        return temp;
+    }
+
+    ////
+    // Remove last
+    pop() {
+        if (!this.head) return null;
+        if (this.size === 1) {
+            let temp = this.head;
+            this.head = null;
+            this.tail = null;
+            this.size--;
+            return temp;
+        }  
+ 
+        let previous = this.head;
+        let current = this.head.next;
+
+        while (current.next) {
+            previous = current;
+            current = current.next;
+        }
+        this.tail = previous;
+        this.tail.next = null;
+        this.size--;
+        if (this.size === 0) {
+            this.head = null;
+            this.tail = null;
+        }
+        return current;
+    }
 
     ////
     // Insert node at the end
@@ -121,49 +164,6 @@ export default class LinkedList {
     }
 
     ////
-    // Remove first
-    shift() {
-        if (!this.head) return null;
-        let temp = this.head;
-        this.head = this.head.next;
-        temp.next = null;
-        this.size--;
-        if (this.size === 0) { 
-            this.tail = null; // If list is empty, set tail to null to to break last pointer & avoid memory leaks
-        }
-        return temp;
-    }
-
-    ////
-    // Remove last
-    pop() {
-        if (!this.head) return null;
-        if (this.size === 1) {
-            let temp = this.head;
-            this.head = null;
-            this.tail = null;
-            this.size--;
-            return temp;
-        }  
- 
-        let previous = this.head;
-        let current = this.head.next;
-
-        while (current.next) {
-            previous = current;
-            current = current.next;
-        }
-        this.tail = previous;
-        this.tail.next = null;
-        this.size--;
-        if (this.size === 0) {
-            this.head = null;
-            this.tail = null;
-        }
-        return current;
-    }
-
-    ////
     // Create list with mulitple elements
     fillList(...data) {
         for (let i = 0; i < data.length; i++) {
@@ -200,8 +200,6 @@ export default class LinkedList {
         while (last.next !== null) {
             last = last.next;
         }
-
-        
         this.head = first.next;
         first.next = null;
         last.next = first;
@@ -257,17 +255,17 @@ export default class LinkedList {
 
     ////
     // Clear the list
-    clearList() {
-        this.head = null;
-        this.tail = null;
+    clearList() { 
+        this.head = null; // Sets both pointers to null
+        this.tail = null; // Letting list data get garbage collected
         this.size = 0;
     }
 
     // Print list data
     printListData() {
-        let current = this.head;
-        while(current) {
-            console.log(current.data);
+        let current = this.head; // Temp pointer to loop through the list without altering it.
+        while(current) { // While not null
+            console.log(current.data); // Print the list - where to implement other print logic
             current = current.next; // Iterate through list
         }
     }
@@ -275,16 +273,19 @@ export default class LinkedList {
     ////
     // O(n) time complexity
     reverse() {
-        let temp = this.head;
-        this.head = this.tail;
+        let temp = this.head; // Temp pointer to swap head and tail
+        this.head = this.tail; // Swapping head and tail
         this.tail = temp;
-        let next = temp.next;
-        let prev = null;
+        let next = temp.next; // Temp pointer to loop through list w/o altering it
+        let prev = null; // Temp pointer to track the previous element while looping
 
-        for (let i = 0; i < this.size; i++) {
+        for (let i = 0; i < this.size; i++) { // Loop
+            // Swap values
             next = temp.next;
             temp.next = prev;
-            prev = temp;
+            
+            // Cycle pointers
+            prev = temp; 
             temp = next;
         }
         return this;
@@ -292,30 +293,30 @@ export default class LinkedList {
 
     // Returns true if the list contains the passed value
     contains(data) {
-        let current = this.head;
-        while (current !== null) {
-            if (current.data === data) {
+        let current = this.head; // Temp pointer
+        while (current !== null) { // Loop through list
+            if (current.data === data) { // If value is found
                 return true;
             }
-            current = current.next;
+            current = current.next; // Cycle pointer
         }
-        return false;
+        return false; // Value not found
     }
     
     // True is the list is empty
-    isEmpty() { return this.size === 0; }
+    isEmpty() { return this.size === 0; } // Shorthand to return true if the list size is 0
 
-    // Insert after a target value
+    // Insert new node after a target value
     insertAfter(data, targetValue) {
-        if (this.size === 0 || this.head === null) return false;
-        let current = this.head;
+        if (this.size === 0 || this.head === null) return false; // Base cases
+        let current = this.head; // Temp pointer to loop through list
 
-        while (current) {
-            if (current.data === targetValue) break;
-            current = current.next;
+        while (current) { // While not null
+            if (current.data === targetValue) break; // If value is found, break loop
+            current = current.next; // Cycle pointer
         }
-
-        let node = new Node(data, current.next);
+        if (current === null) return this.head; // Value wasnt found
+        let node = new Node(data, current.next); // Create node to insert
         current.next = node;
         this.size++;
         return this.head;
@@ -323,7 +324,7 @@ export default class LinkedList {
 
     // Insert before a target value
     insertBefore(insertData, targetValue) {
-        if (this.head === null || this.head.next === null || !this.contains(targetValue)) return;
+        if (this.head === null || this.size === 0) return;
         let curr = this.head;
         let prev = null;
 
