@@ -32,6 +32,12 @@ export default class DoublyLinkedList {
 
     getTail() { return this.tail; }
 
+    updateHead(data) {
+        let curr = this.head;
+        curr.data = data;
+        return this.head = curr;
+    }
+
     // Insert node at the end of a list
     push(data) { 
         const node = new Node(data, this.head, null);
@@ -192,10 +198,6 @@ export default class DoublyLinkedList {
 
     // Sort list
 
-    // Set head of list
-
-    // Get tail of list
-
     // Set tail of list
 
     // Create and fill list
@@ -251,6 +253,19 @@ export default class DoublyLinkedList {
     // Contains
 
     // Find index of node
+    getIndexOf(value) {
+        if (this.size === 0) return 0;
+        let curr = this.head;
+        let count = 0;
+
+        while (curr.next !== null) {
+            if (curr.data === value) return count;
+            curr = curr.next;
+            count++;
+            if (count > this.size) break;
+        }
+        return 0;
+    }
 
     // Find node
 

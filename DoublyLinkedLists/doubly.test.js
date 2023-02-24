@@ -30,6 +30,39 @@ describe("Doubly LinkedList", () => {
         expect(linkedList.getTail().data).toBe(5);
     });
 
+    it("Should return the index of a target value", () => {
+        linkedList.fillList(1, 2, 3, 4);
+        expect(linkedList.head.data).toBe(1);
+        expect(linkedList.head.next.data).toBe(2);
+        expect(linkedList.head.next.next.data).toBe(3);
+        expect(linkedList.getSize()).toBe(4);
+        expect(linkedList.getTail().data).toBe(4);
+
+        expect(linkedList.getIndexOf(3)).toBe(2);
+        expect(linkedList.getIndexOf(4)).toBe(3);
+        expect(linkedList.getIndexOf(1)).toBe(0);
+        expect(linkedList.getIndexOf(2)).toBe(1);
+        expect(linkedList.getIndexOf(6)).toBe(0);
+    });
+
+    it("Should update the value in the head node", () => {
+        linkedList.push(1);
+        linkedList.push(2);
+        linkedList.push(3);
+    
+        expect(linkedList.head.data).toBe(1);
+        expect(linkedList.head.next.data).toBe(2);
+        expect(linkedList.head.next.next.data).toBe(3);
+        expect(linkedList.getSize()).toBe(3);
+        expect(linkedList.getTail().data).toBe(3);
+
+        linkedList.updateHead(5);
+        expect(linkedList.head.data).toBe(5);
+        expect(linkedList.head.next.data).toBe(2);
+        expect(linkedList.getSize()).toBe(3);
+        expect(linkedList.getTail().data).toBe(3);
+    });
+
     it("Should clear a list of any amount of elements", () => {
         linkedList.push(1);
         linkedList.push(2);
