@@ -1,6 +1,6 @@
 import LinkedList from './LinkedList';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
-import { insertionSort } from '../functions';
+import { insertionSort } from './LinkedList';
 
 describe("LinkedList", () => {
     let linkedList;
