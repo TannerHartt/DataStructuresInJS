@@ -1,6 +1,4 @@
-This project is a collection of popular data structures and algorithms recreated in JavaScript as well as high code coverage for each function.
-
-This project also contains a collection of utility functions that can be found in the functions.js file.
+This project is a collection of popular data structures and algorithms recreated in JavaScript as well as high code coverage for each function using the testing framework `Vitest`.
 
 <br>
 
@@ -26,7 +24,7 @@ This project also contains a collection of utility functions that can be found i
 
         npm run coverage
 
-The server will be running at localhost:5173 but wont be necessary to open.
+The server will be running at localhost:5173 but it wont be necessary to open.
 
 The functions and algorithms are tested using the Vite testing framework Vitest and not using the live server. The server is used primarily for live debugging.
 
