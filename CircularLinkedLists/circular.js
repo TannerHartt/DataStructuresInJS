@@ -1,9 +1,10 @@
-import LinkedList from '../Linked-Lists/LinkedList';
+
+// Node class to use for both versions of circular lists
 export class Node {
     constructor(data, next = null, prev = null) {
         this.data = data;
         this.next = next;
-        // this.prev = prev;
+        this.prev = prev; // Only for doubly version
     }
 
     getData() { return this.data; }
@@ -14,11 +15,12 @@ export class Node {
 
     setNext(next) { this.next = next; }
 
-    // getPrev() { return this.prev; }
+    getPrev() { return this.prev; } // Only for doubly version
 
-    // setPrev(prev) { this.prev = prev; }
+    setPrev(prev) { this.prev = prev; } // Only for doubly version
 }
 
+// Singly linked list version of a circular list
 export default class CircularLinkedList {
     constructor(initial = null) { // Can support a inital size of one or 0
         if (initial === null) {
@@ -29,13 +31,10 @@ export default class CircularLinkedList {
             let node = new Node(initial);
             this.head = node;
             this.tail = node;
+            this.tail.next = this.head;
             this.size = 1;
         }
     }
-    // constructor() {
-    //     super();
-    // }
-
 
     getSize() { return this.size }
 
@@ -116,5 +115,44 @@ export default class CircularLinkedList {
         }
         this.size++;
         return this;
+    }
+}
+
+// Doubly linked list version of a circular list
+export class CircularDoublyLinkedList {
+    constructor(initial = null) {
+        if (initial === null) {
+            this.head = null;
+            this.tail = null;
+            this.size = 0;
+        } else {
+            let node = new Node(initial);
+            this.head = node;
+            this.tail = node;
+            this.tail.next = this.head;
+            this.size = 1;
+        }
+    }
+
+    clearList() {
+        this.head = null;
+        this.tail = null;
+        this.size = 0;
+    }
+
+    push(value) {
+
+    }
+
+    pop() {
+
+    }
+
+    unshift(value) {
+
+    }
+
+    shift() {
+
     }
 }
