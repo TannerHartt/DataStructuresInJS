@@ -7,6 +7,7 @@ export function binarySearchInArray(array, target, start = 0, end = array.length
     if (array[middle] < target) return findInArray(array, target, middle + 1, end);
 }
 
+
 /**
  * An iterative approach to the binary search algorithm for arrays, only works on sorted arrays
  * @param {*} arr Array to be searched through for the target
@@ -27,6 +28,7 @@ export function binarySearchIterative(arr, target) {
     return arr[middle] === target ? middle : -1;
 }
 
+
 // Function to sort an array using merge sort recursively
 export function mergeSort(array) {
     if (array.length === 1) return array; // Base case
@@ -35,6 +37,7 @@ export function mergeSort(array) {
     let right = array.slice(middle);
     return merge(mergeSort(left), mergeSort(right));
 }
+
 
 // Function to merge two sorted arrays
 function merge(array1, array2) {
@@ -62,6 +65,7 @@ function merge(array1, array2) {
     return combined;
 }
   
+
 // Recursive function to sort an array using quick sort
 // O(n log n) time complexity - good!
 export function quickSort(array, lowIndex = 0, highIndex = array.length -1) {
@@ -90,12 +94,14 @@ export function quickSort(array, lowIndex = 0, highIndex = array.length -1) {
     return array;
 }
 
+
 // Utility function to swap two elements in an array
 function swap(array, index1, index2) {
     let temp = array[index1];
     array[index1] = array[index2];
     array[index2] = temp;
 }
+
 
 // Utility function to move all elements less than the pivot to left and all elements greater than the pivot to the right
 function pivot(array, pivotIndex = 0, endIndex = array.length - 1) {
@@ -109,6 +115,7 @@ function pivot(array, pivotIndex = 0, endIndex = array.length - 1) {
     swap(array, pivotIndex, swapIndex);
     return swapIndex;
 }
+
 
 // Recursive function to sort an array using quick sort with a different implementation
 export function quickSortUsingPivot(array, left = 0, right = array.length - 1) {
@@ -180,4 +187,26 @@ export function selectionSort(array) {
         }
     }
     return array;
+}
+
+
+// Function to sort an array of numbers using radix sort
+export function radixSort(array) {
+    let max = Math.max(...array);
+    let maxDigits = max.toString().length;
+    let buckets = Array.from({length: 10}, () => []);
+    for (let i = 0; i < maxDigits; i++) {
+        for (let j = 0; j < array.length; j++) {
+            let digit = getDigit(array[j], i);
+            buckets[digit].push(array[j]);
+        }
+        array = [].concat(...buckets);
+        buckets = Array.from({length: 10}, () => []);
+    }
+    return array;
+}
+
+// Radix sort helper function to get the digit at a given position
+function getDigit(num, i) {
+    return Math.floor(Math.abs(num) / Math.pow(10, i)) % 10;
 }
