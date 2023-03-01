@@ -61,7 +61,7 @@ export default class DoublyLinkedList {
             this.head = null;
             this.tail = null;
         } else { // if list has two or more elements
-            this.tail = this.tail.prev;
+            this.tail = temp.prev;
             this.tail.next = null;
             temp.prev = null;
         }
@@ -92,7 +92,7 @@ export default class DoublyLinkedList {
             this.head = null;
             this.tail = null;
         } else { // if list has two or more elements
-            this.head = this.head.next;
+            this.head = temp.next;
             this.head.prev = null;
             temp.next = null;
         }
@@ -117,32 +117,32 @@ export default class DoublyLinkedList {
         return true;
     }
 
-    // Get node at index
+    // Get node at index (optimized version)
     get(index) {
-        if (index > this.size || index < 0) return false;
+        if (index >= this.size || index < 0) return false;
         let temp = this.head;
-        if (index < this.size / 2) {
-            for (let i = 0; i < index; i++) {
+        if (index < this.size / 2) { // If index is closer to the head
+            for (let i = 0; i < index; i++) { // Loop from the front
                 temp = temp.next;
             }
-        } else {
+        } else { // If index is closer to the tail
             temp =  this.tail;
-            for (let i = this.size - 1; i > index; i--) {
+            for (let i = this.size - 1; i > index; i--) { // Loop from the back
                 temp = temp.prev;
             }
         }
         return temp;
     }
 
-    // Another way to get node at index
+    // Another way to get node at index (unoptimized version)
     getAt(index) {
         if (index >= this.size || index < 0) return false;
         else {
             let current = this.head;
-            let it = 0;
+            let count = 0;
 
-            while (it < index) {
-                it++;
+            while (count < index) {
+                count++;
                 current = current.next;
             }
             return current;
