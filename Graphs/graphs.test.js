@@ -1,11 +1,11 @@
 import { describe, it, expect, beforeEach, afterEach } from "vitest";
-import Graph from "./graphs";
+import GraphAdjList from "./graphs";
 
 describe("Graphs", () => {
     let graph;
 
     beforeEach(() => {
-        graph = new Graph();
+        graph = new GraphAdjList();
     });
 
     afterEach(() => { 

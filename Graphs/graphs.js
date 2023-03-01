@@ -1,6 +1,6 @@
-export default class Graph {
+export default class GraphAdjList {
     constructor() {
-        this.adjacencyList = {};        
+        this.adjacencyList = {};
     }
 
     addVertex(vertex) {
