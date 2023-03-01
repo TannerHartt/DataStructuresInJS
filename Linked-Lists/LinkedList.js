@@ -247,6 +247,12 @@ export default class LinkedList {
         return arr;
     }
 
+    // Creates a new list from an array of values
+    fromArray(array) {
+        array.forEach((value) => this.push(value));
+        return this;
+    }
+
     ////
     // Clear the list
     clearList() { 
