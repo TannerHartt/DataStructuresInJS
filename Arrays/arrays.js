@@ -7,7 +7,27 @@ export function binarySearchInArray(array, target, start = 0, end = array.length
     if (array[middle] < target) return findInArray(array, target, middle + 1, end);
 }
 
+/**
+ * An iterative approach to the binary search algorithm for arrays, only works on sorted arrays
+ * @param {*} arr Array to be searched through for the target
+ * @param {*} target The value to search for in the array
+ * @returns The index of the target in the array, or -1 if the target is not found
+ */
+export function binarySearchIterative(arr, target) {
+    let start = 0;
+    let end = arr.length - 1;
+    let middle = Math.floor((start + end) / 2);
 
+    while (arr[middle] !== target && start <= end) {
+        if (target < arr[middle]) end = middle - 1; 
+        else start = middle + 1;
+        middle = Math.floor((start + end) / 2);
+    }
+    // If the element at middle index is === target, return the index else return -1
+    return arr[middle] === target ? middle : -1;
+}
+
+// Function to sort an array using merge sort recursively
 export function mergeSort(array) {
     if (array.length === 1) return array; // Base case
     let middle = Math.floor(array.length / 2);
@@ -16,6 +36,7 @@ export function mergeSort(array) {
     return merge(mergeSort(left), mergeSort(right));
 }
 
+// Function to merge two sorted arrays
 function merge(array1, array2) {
     let combined = [];
     let i = 0, j = 0;
@@ -129,62 +150,8 @@ export function insertionSort2(array) {
     return array;
 }
 
-
-// FIXME: Fix this function
-
-// export function mergeSort(array) {
-//     let length = array.length;
-//     if (length <= 1) return array;
-
-//     let middle = Math.floor(length / 2);
-//     let leftHalf = array.slice(0, middle);
-//     let rightHalf = array.slice(middle);
-
-//     for (let i = 0; i < middle; i++) { // Fill left half
-//         leftHalf[i] = array[i];
-//     }
-
-//     for (let i = middle; i < length; i++) { // Fill right half
-//         rightHalf[i - middle] = array[i];
-//     }
-
-//     mergeSort(leftHalf);
-//     mergeSort(rightHalf);
-
-//     // Merge the two halves
-//     merge(array, leftHalf, rightHalf);
-// }
-
-// function merge(array, leftHalf, rightHalf) {
-//     let leftSize = leftHalf.length;
-//     let rightSize = rightHalf.length;
-
-//     let i, j, k = 0;
-
-//     while (i < leftSize && j < rightSize) { // Merge the two halves
-//         if (leftHalf[i] <= rightHalf[j]) { // Compare the elements in the two halves
-//             array[k] = leftHalf[i]; // Add the smaller element to the array
-//             i++;
-//         } else {
-//             array[k] = rightHalf[j]; // Add the smaller element to the array
-//             j++;
-//         }
-//         k++;
-//     }
-
-//     while(i < leftSize) { // Any remaining elements in left half
-//         array[k] = leftHalf[i];
-//         i++;
-//         k++;
-//     }
-//     while(j < rightSize) { // Any remaining elements in right half
-//         array[k] = rightHalf[j];
-//         j++;
-//         k++;
-//     }
-// }
-
-
+// O(n^2) time complexity - horrible!
+// Function to sort an array using bubble sort
 export function bubbleSort(array) {
     for (let i = array.length - 1; i > 0; i--) {
         for (let j = 0; j < i; j++) {
@@ -198,7 +165,7 @@ export function bubbleSort(array) {
     return array;
 }
 
-
+// Function to sort an array using selection sort
 export function selectionSort(array) {
     let min;
     for (let i = 0; i < array.length - 1; i++) {
