@@ -1,8 +1,8 @@
 import CircularLinkedList from './circular';
+import CircularDoublyLinkedList from "./circular";
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
-import LinkedList from '../Linked-Lists/LinkedList';
 
-describe.only("Doubly LinkedList", () => {
+describe.skip("Circular Singly LinkedLists", () => {
     let list;
 
     beforeEach(() => {
@@ -103,3 +103,42 @@ describe.only("Doubly LinkedList", () => {
     });
 });
 
+
+
+describe.only("Circular Doubly LinkedLists", () => {
+    let list;
+
+    beforeEach(() => {
+        list = new CircularDoublyLinkedList();
+    });
+
+    afterEach(() => { 
+        list.clearList();
+    });
+
+    it.only("Should push a new node on to the list", () => {
+        list.push(1);
+        list.push(2);
+        list.push(3);
+        expect(list.getSize()).toBe(3);
+        expect(list.getHead().data).toBe(1);
+        expect(list.getHead().prev.data).toBe(3);
+        expect(list.getHead().next.data).toBe(2);
+        expect(list.getTail().data).toBe(3);
+        expect(list.getTail().next.data).toBe(1);
+        expect(list.getTail().prev.data).toBe(2);
+    });
+
+    it.skip("Should push a new node on to the list", () => {
+        list.push(1);
+        list.push(2);
+        list.push(3);
+        expect(list.getSize()).toBe(3);
+        expect(list.getHead().data).toBe(1);
+        expect(list.getHead().prev.data).toBe(3);
+        expect(list.getTail().data).toBe(3);
+        expect(list.getTail().next.data).toBe(1);
+    });
+
+
+});

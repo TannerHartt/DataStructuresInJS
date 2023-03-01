@@ -8,15 +8,10 @@ export class Node {
     }
 
     getData() { return this.data; }
-
     setData(data) { this.data = data; }
-
     getNext() { return this.next; }
-
     setNext(next) { this.next = next; }
-
     getPrev() { return this.prev; } // Only for doubly version
-
     setPrev(prev) { this.prev = prev; } // Only for doubly version
 }
 
@@ -48,7 +43,7 @@ export default class CircularLinkedList {
         this.size = 0;
     }
 
-    // o(1)
+    // O(1)
     // Insert a node the end of the list
     push(value){
         let node = new Node(value, this.head); // Creates a new node with the head as its next.
@@ -63,7 +58,7 @@ export default class CircularLinkedList {
         return this;
     }
 
-    // o(n)
+    // O(n)
     // Remove the last element and return it.
     pop() {
         if (!this.head || this.size === 0) return null; // If list is empty
@@ -89,7 +84,7 @@ export default class CircularLinkedList {
         return current; // Return the removed node
     }
 
-    //O(1)
+    // O(1)
     // Remove first node of the list and return it
     shift() {
         if (!this.head || this.size === 0) return null;
@@ -101,7 +96,7 @@ export default class CircularLinkedList {
         return temp;
     }
 
-    // o(1)
+    // O(1)
     // Insert a node at the beginning
     unshift(value) {
         if (!this.head || this.size === 0) { 
@@ -114,6 +109,13 @@ export default class CircularLinkedList {
             this.tail.next = this.head;
         }
         this.size++;
+        return this;
+    }
+
+    fillList(...data) {
+        for(let i = 0; i < data.length; i++) {
+            this.push(data[i]);
+        }
         return this;
     }
 }
@@ -140,8 +142,21 @@ export class CircularDoublyLinkedList {
         this.size = 0;
     }
 
+    // FIX IMPLEMENTING
     push(value) {
-
+        const node = new Node(value, this.head);
+        if (this.size === 0) { // if list is empty
+            this.head = node;
+            this.tail = node;
+            this.head.prev = this.tail;
+        } else {
+            this.tail.next = node;
+            node.next = this.head;
+            node.prev = this.tail;
+            this.tail = node;
+        }
+        this.size++;
+        return this;
     }
 
     pop() {
