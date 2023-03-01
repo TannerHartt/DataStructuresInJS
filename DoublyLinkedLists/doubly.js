@@ -106,7 +106,7 @@ export default class DoublyLinkedList {
         if (index === 0) return this.unshift(data); // Inserting at the beginning of the list
         if (index === this.size) return this.push(data); // Inserting at the end of the list
 
-        const before = this.getAt(index - 1); // Get node 1 before desired index
+        const before = this.get(index - 1); // Get node 1 before desired index
         const node = new Node(data, before.next);
         const after = before.next;
         before.next = node;
