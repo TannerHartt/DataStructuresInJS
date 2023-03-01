@@ -9,7 +9,7 @@ describe("Graphs", () => {
     });
 
     afterEach(() => { 
-        
+        graph.clear();
     });
 
     it("Should create an empty graph", () => {
@@ -21,4 +21,4 @@ describe("Graphs", () => {
         expect(graph.addVertex('A')).toBeFalsy(); // Cant have duplicates
         expect(graph.adjacencyList).toEqual({ A: []});
     });
-});
+});``

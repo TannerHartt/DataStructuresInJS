@@ -1,5 +1,3 @@
-
-
 export default class Graph {
     constructor() {
         this.adjacencyList = {};        
@@ -11,6 +9,16 @@ export default class Graph {
             return true;
         }
         return false;
+    }
+    
+    removeVertex(vertex) {
+        if (!this.adjacencyList[vertex]) return null;
+        while(this.adjacencyList[vertex].length) {
+            let temp = this.adjacencyList[vertex].pop();
+            this.removeEdge(vertex, temp);
+        }
+        delete this.adjacencyList[vertex];
+        return this;
     }
 
     addEdge(vertex1, vertex2) {
@@ -31,13 +39,8 @@ export default class Graph {
         return false;
     }
 
-    removeVertex(vertex) {
-        if (!this.adjacencyList[vertex]) return null;
-        while(this.adjacencyList[vertex].length) {
-            let temp = this.adjacencyList[vertex].pop();
-            this.removeEdge(vertex, temp);
-        }
-        delete this.adjacencyList[vertex];
-        return this;
+    clear() {
+        this.adjacencyList = {};
     }
+
 }
