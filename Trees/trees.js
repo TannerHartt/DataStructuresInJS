@@ -6,7 +6,7 @@ export class Node {
     }
 }
 
-export default class Tree { 
+export default class BSTree { 
     constructor(data = null) {
         if (data !== null) {
             const node = new Node(data);
@@ -36,26 +36,28 @@ export default class Tree {
     insert(data) { 
         const node = new Node(data);
         if (this.root === null) {
+            this.root = node;
             this.size++;
-            return this.root = node;
-        }
-        let temp = this.root;
-        while(true) {
-            if (node.data === temp.data) return null;
-            if (node.data < temp.data) {
-                if (temp.left === null) {
-                    temp.left = node;
-                    this.size++;
-                    return this;
+            return this;
+        } else {
+            let temp = this.root;
+            while(true) {
+                if (data === temp.data) return null;
+                if (node.data < temp.data) {
+                    if (temp.left === null) {
+                        temp.left = node;
+                        this.size++;
+                        return this;
+                    }
+                    temp = temp.left;
+                } else {
+                    if (temp.right === null) {
+                        temp.right = node;
+                        this.size++;
+                        return this;
+                    }
+                    temp = temp.right;
                 }
-                temp = temp.left;
-            } else {
-                if (temp.right === null) {
-                    temp.right = node;
-                    this.size++;
-                    return this;
-                }
-                temp = temp.right;
             }
         }
     }
@@ -70,6 +72,17 @@ export default class Tree {
             else return true;
         }
         return false;
+    }
+
+    get(data) {
+        if (this.root === null) return null;
+        let temp = this.root;
+        while (temp !== null) {
+            if (data < temp.data) temp = temp.left;
+            else if (data > temp.data) temp = temp.right;
+            else return temp;
+        }
+        return null;
     }
 
     // Remove node from tree
