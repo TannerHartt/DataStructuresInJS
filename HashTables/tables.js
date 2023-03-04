@@ -14,6 +14,18 @@ export default class HashTable {
     } 
 
     // O(1)
+    // Another way to hash a key
+    hash(key) {
+        let total = 0;
+        for (let char in key) {
+            let value = char.charCodeAt(0) - 96;
+            total = (total + value) % this.dataMap.length;
+        }
+        return total;
+    }
+
+    // O(1)
+    // Sets a key-value pair in the hash table
     set(key, value) {
         let index = this._hash(key);
         if (!this.dataMap[index]) this.dataMap[index] = [];
@@ -22,6 +34,7 @@ export default class HashTable {
     }
 
     // O(1)
+    // Returns the value associated with the key
     get(key) {
         let index = this._hash(key);
         if (this.dataMap[index]) {
@@ -34,16 +47,44 @@ export default class HashTable {
         return null;
     }
 
-    keys() {
+    // Returns an array containing all keys in the hash table
+    keys(unique = false) {
         let allKeys = [];
         for (let i = 0; i < this.dataMap.length; i++) {
             if (this.dataMap[i]) {
                 for (let j = 0; j < this.dataMap[i].length; j++) {
-                    allKeys.push(this.dataMap[i][j][0]);
+                    if (unique) {
+                        if (!allKeys.includes(this.dataMap[i][j][0])) {
+                            allKeys.push(this.dataMap[i][j][0]); // If unique is true, push only unique keys
+                        }
+                    } else allKeys.push(this.dataMap[i][j][0]);
                 }       
             }
         }
         return allKeys;
+    }
+
+    // O(n)
+    // Returns an array containing all values in the hash table
+    values(unique = false) {
+        let allValues = [];
+        for (let i = 0; i < this.dataMap.length; i++) {
+            if (this.dataMap[i]) {
+                for (let j = 0; j < this.dataMap[i].length; j++) {
+                    if (unique) {
+                        if (!allValues.includes(this.dataMap[i][j][1])) {
+                            allValues.push(this.dataMap[i][j][1]); // If unique is true, push only unique values
+                        }
+                    } else allValues.push(this.dataMap[i][j][1]); // If unique is false, push all values
+                }       
+            }
+        }
+        return allValues;
+    }
+
+
+    clear() {
+        this.dataMap = new Array(this.size);
     }
 }
 
