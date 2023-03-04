@@ -1,11 +1,11 @@
 import { describe, it, expect, beforeEach, afterEach } from "vitest";
-import Tree from "./trees";
+import BSTree from "./trees";
 
 describe.skip("Trees", () => {
     let tree;
 
     beforeEach(() => {
-        tree = new Tree();
+        tree = new BSTree();
     });
 
     afterEach(() => { 
@@ -13,14 +13,14 @@ describe.skip("Trees", () => {
     });
 
     it("Should create an empty tree", () => {
-        tree = new Tree();
+        tree = new BSTree();
         expect(tree.getSize()).toBe(0);
         expect(tree.getRoot()).toBeFalsy();
         expect(tree.isEmpty()).toBeTruthy();
     });
 
     it("Should create a tree with an intial root", () => {
-        tree = new Tree(5);
+        tree = new BSTree(5);
         expect(tree.getSize()).toBe(1);
         expect(tree.getRoot().data).toBe(5);
         expect(tree.isEmpty()).toBeFalsy();
