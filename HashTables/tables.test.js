@@ -1,7 +1,7 @@
 import { describe, it, expect, beforeEach, afterEach } from "vitest";
 import HashTable from "./tables";
 
-describe.skip("Hash Tables", () => {
+describe("Hash Tables", () => {
     let table;
 
     beforeEach(() => {
@@ -9,10 +9,11 @@ describe.skip("Hash Tables", () => {
     });
 
     afterEach(() => { 
-        
+        table.clear();
     });
 
     it("Should create an empty hash table of size 7", () => {
+        table = new HashTable(7);
         expect(table.size).toBe(7);
     });
 });
