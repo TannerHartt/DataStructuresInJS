@@ -18,9 +18,11 @@ export default class Stack {
         if (data !== null) {
             const node = new Node(data);
             this.top = node;
+            this.bottom = node;
             this.size = 1;
         } else {
             this.top = null;
+            this.bottom = null;
             this.size = 0;
         }
     }
@@ -40,7 +42,10 @@ export default class Stack {
     // Push a new node on to the stack
     push(data) {
         const node = new Node(data);
-        if (this.size === 0) this.top = node;
+        if (this.size === 0) {
+            this.top = node;
+            this.bottom = node;
+        }
         else {
             node.next = this.top;
             this.top = node;
@@ -52,6 +57,7 @@ export default class Stack {
     // Pop a node off the stack
     pop() {
         if (this.size === 0) return null;
+        if (this.top === this.bottom) this.bottom = null;
         const node = this.top;
         this.top = this.top.next;
         node.next = null;
