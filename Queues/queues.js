@@ -46,6 +46,8 @@ export default class Queue {
             this.last.next = node;
             this.last = node;
         }
+
+        // return ++this.size;
         this.size++;
         return this;
     }
